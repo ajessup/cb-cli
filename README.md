@@ -47,7 +47,6 @@ making them easy to configure.
 
 ## TODOs
 
-* Add support for Buildfiles
 * Add pip install support
 * Better build/poll UI
 * Add automatic creation of buildfiles

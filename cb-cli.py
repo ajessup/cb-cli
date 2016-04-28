@@ -1,14 +1,14 @@
 import click
-import base64
-import hashlib
 from googleapiclient import discovery
 from googleapiclient import http
 from googleapiclient.errors import HttpError
 import json
+import string
 import tarfile
 import tempfile
 import time
 import os
+import yaml
 
 from oauth2client.client import GoogleCredentials
 
@@ -40,6 +40,36 @@ def build(path, image, buildfile, project_id, bucket):
     if not os.path.exists(buildfile):
         raise click.UsageError('Could not find buildfile %s, please add one or use --buildfile to specify one' % buildfile)
 
+    # Parse buildfile
+    with open(buildfile, 'r') as stream:
+        build_config_text=string.Template(stream.read()).substitute(ContainerImageName=image)
+
+    build_config = yaml.load(build_config_text)
+
+    cb_request_body = {
+        "source": {
+            "storageSource": {
+                "bucket": bucket,
+                "object": ''
+            }
+        },
+        "steps": [],
+        "images": [
+            image
+        ]
+    }
+
+    for step in build_config['steps']:
+        step_name = str(step['name'])
+        step_args = []
+        if step['args'] and isinstance(step['args'], list):
+            for arg in step['args']:
+                step_args.append(str(arg))
+        cb_request_body['steps'].append({
+            'name': step_name,
+            'args': step_args
+        })
+
     click.echo('Building %s to %s with %s' % (path, image, buildfile))
 
     # Create temporary archive for the source directory
@@ -55,10 +85,8 @@ def build(path, image, buildfile, project_id, bucket):
 
     tar.close()
     archive.close()
-    # hash_md5 = hashlib.md5()
-    # with open(archive.name, "rb") as f:
-    #     for chunk in iter(lambda: f.read(4096), b""):
-    #         hash_md5.update(chunk)
+
+    cb_request_body['source']['storageSource']['object'] = os.path.basename(archive.name)
 
     # Upload the source directory to GCS
     click.echo('Checking for bucket %s...' % bucket)
@@ -105,32 +133,8 @@ def build(path, image, buildfile, project_id, bucket):
     ccb_service = discovery.build('cloudbuild', 'v1', credentials=credentials,
         discoveryServiceUrl="https://content-cloudbuild.googleapis.com/$discovery/rest?version=v1")
 
-    body = {
-        "source": {
-            "storageSource": {
-                "bucket": bucket,
-                "object": os.path.basename(archive.name)
-            }
-        },
-        "steps": [
-            {
-                "name": "gcr.io/cloud-builders/dockerizer",
-                "args": [
-                    image
-                ]
-            }
-        ],
-        "images": [
-            image
-        ]
-    }
-
-    # req = ccb_service.projects().builds().list(projectId=project_id)
-    # resp = req.execute()
-    # print(json.dumps(resp, indent=2))
-
     req = ccb_service.projects().builds().create(
-        projectId=project_id, body=body)
+        projectId=project_id, body=cb_request_body)
 
     resp = req.execute()
 
