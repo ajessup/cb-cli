@@ -24,7 +24,7 @@ prior to running the script. Read more on Google's
 To build a Container Image from source, add a Buildfile to the base directory
 of the application's source tree, then run the Container Builder CLI.
 
- ./cb-cli.py gcr.io/your-project-id/image-name
+ `./cb-cli.py gcr.io/your-project-id/image-name`
 
 The Buildfile describes how your source code should be transformed into a Docker
 image, and is run remotely using the Cloud Container Builder service.
@@ -32,7 +32,7 @@ image, and is run remotely using the Cloud Container Builder service.
 ## Buildfiles (not yet supported)
 
 Buildfiles describe a set of *build steps* that are run in serial against your
-source tree to produce a Docker image. 
+source tree to produce a Docker image.
 
 To help get you started, here are some useful Buildfiles.
 
@@ -44,3 +44,10 @@ A build step is itself simply a Docker image within which your
 source will be transiently mounted in a special directory. You can customize
 the arguments, environment variables and parameters used to invoke a build step,
 making them easy to configure.
+
+## TODOs
+
+* Add support for Buildfiles
+* Add pip install support
+* Better build/poll UI
+* Add automatic creation of buildfiles
