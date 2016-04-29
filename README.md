@@ -29,16 +29,16 @@ of the application's source tree, then run the Container Builder CLI.
 The Buildfile describes how your source code should be transformed into a Docker
 image, and is run remotely using the Cloud Container Builder service.
 
-## Buildfiles (not yet supported)
+## Buildfiles
 
 Buildfiles describe a set of *build steps* that are run in serial against your
 source tree to produce a Docker image.
 
 To help get you started, here are some useful Buildfiles.
 
-* Build any Docker container from a Dockerfile
-* Build a lean Spring Boot application from source using a Maven pom.xml file
-* Build a Node.js application from a Gulp configuration file
+* Build any Docker container from a Dockerfile [Buildfile](buildfiles/docker.Buildfile)
+* Build a lean Spring Boot application from source using a Maven pom.xml file [Buildfile](buildfiles/springboot.Buildfile)
+* Build a Node.js application from a Gulp configuration file [Buildfile](buildfiles/node-gulp.Buildfile)
 
 A build step is itself simply a Docker image within which your
 source will be transiently mounted in a special directory. You can customize
@@ -48,5 +48,6 @@ making them easy to configure.
 ## TODOs
 
 * Add pip install support
+* Add Stacksmith integration
 * Better build/poll UI
 * Add automatic creation of buildfiles
