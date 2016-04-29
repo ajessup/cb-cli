@@ -9,6 +9,12 @@ This CLI provides a handy mechanism for accessing the API for building Container
 images from local source, and introduces Buildfiles for describing Container
 Builder configurations.
 
+## Installation
+
+The recommended way to install this tool is from pypy via pip.
+
+ `pip install cbcli`
+
 ## Authentication
 
 This tool uses Application Default Credentials to authenticate to the Google
@@ -24,7 +30,7 @@ prior to running the script. Read more on Google's
 To build a Container Image from source, add a Buildfile to the base directory
 of the application's source tree, then run the Container Builder CLI.
 
- `./cb-cli.py gcr.io/your-project-id/image-name`
+ `cbcli gcr.io/your-project-id/image-name`
 
 The Buildfile describes how your source code should be transformed into a Docker
 image, and is run remotely using the Cloud Container Builder service.
@@ -47,7 +53,6 @@ making them easy to configure.
 
 ## TODOs
 
-* Add pip install support
 * Add Stacksmith integration
 * Better build/poll UI
 * Add automatic creation of buildfiles

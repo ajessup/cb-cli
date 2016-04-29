@@ -1,0 +1,9 @@
+bin*
+include*
+lib*
+*.egg
+pip-selfcheck.json
+.DS_Store
+.Python
+*\.egg-info
+dist*
