@@ -1,9 +1,10 @@
 # cb-cli - An Unofficial CLI tool for Google Cloud Container Builder
 
-Google Cloud Container Builder is a powerful tool for building Container Images
-quickly and efficiently from source and storing them in Google Container
-Registry (GCR). While Container Builder supports Dockerfiles to configure builds
-it also supports other methods of building images more safely and efficiently.
+[Google Cloud Container Builder](https://cloud.google.com/container-builder/docs/)
+is a powerful tool for building Container Images quickly and efficiently from source 
+and storing them in Google Container Registry (GCR). While Container Builder
+supports Dockerfiles to configure builds it also supports other methods of 
+building images more safely and efficiently.
 
 This CLI provides a handy mechanism for accessing the API for building Container
 images from local source, and introduces Buildfiles for describing Container
@@ -30,6 +31,10 @@ Cloud Platform. To use these, download the Google Cloud SDK and run:
 
 prior to running the script. Read more on Google's
 [documentation](https://developers.google.com/identity/protocols/application-default-credentials#whentouse)
+
+You might also want to set your project ID for the tool to use if you don't want to keep passing it on the command line each time. You can do that with:
+
+ `export GCP_PROJECT_ID=your-project-id`
 
 ## Basic Usage
 
