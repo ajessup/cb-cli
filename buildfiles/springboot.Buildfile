@@ -7,6 +7,7 @@ steps:
   args:
   - mvn
   - package
-- name: gcr.io/cloud-builders/dockerizer
+- name: gcr.io/jessup-spinnaker-test/gcp-springboot:jdk8
   args:
+  - target/myproject-0.0.1-SNAPSHOT.jar
   - $ContainerImageName
