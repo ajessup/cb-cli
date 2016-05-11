@@ -1,6 +1,7 @@
 #
-# This buildfile expects a Maven pom.xml and Dockerfile in the base directory
-# It will build the default Maven artifact, and then run the Docker build
+# This buildfile expects a Maven pom.xml in the base directory
+# The first step will build the maven artifact
+# The second step will package the JAR into a Docker image that will run it with the right flags when started
 #
 steps:
 - name: maven:3-jdk-7
