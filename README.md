@@ -13,7 +13,13 @@ Builder configurations.
 
 The recommended way to install this tool is from pypy via pip.
 
- `pip install cbcli`
+ `sudo pip install cbcli`
+
+NB. OS X 10.11 (El Capitan) has a known issue where an earlier dependency of
+cbcli (the `six` library) has been pre-installed, and cannot be uninstalled. To
+avoid this, install with:
+
+ `sudo pip install cbcli --ignore-installed six`
 
 ## Authentication
 
