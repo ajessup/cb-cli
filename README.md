@@ -61,9 +61,3 @@ A build step is itself simply a Docker image within which your
 source will be transiently mounted in a special directory. You can customize
 the arguments, environment variables and parameters used to invoke a build step,
 making them easy to configure.
-
-## TODOs
-
-* Add Stacksmith integration
-* Better build/poll UI
-* Add automatic creation of buildfiles
