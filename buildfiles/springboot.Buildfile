@@ -8,7 +8,7 @@ steps:
   args:
   - mvn
   - package
-- name: gcr.io/jessup-spinnaker-test/gcp-springboot:jdk8
+- name: gcr.io/jessup-spinnaker-test/gcp-springboot:jdk8-nogcp
   args:
   - target/myproject-0.0.1-SNAPSHOT.jar
   - $ContainerImageName
