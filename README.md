@@ -1,9 +1,9 @@
 # cb-cli - An Unofficial CLI tool for Google Cloud Container Builder
 
 [Google Cloud Container Builder](https://cloud.google.com/container-builder/docs/)
-is a powerful tool for building Container Images quickly and efficiently from source 
+is a powerful tool for building Container Images quickly and efficiently from source
 and storing them in Google Container Registry (GCR). While Container Builder
-supports Dockerfiles to configure builds it also supports other methods of 
+supports Dockerfiles to configure builds it also supports other methods of
 building images more safely and efficiently.
 
 This CLI provides a handy mechanism for accessing the API for building Container
@@ -55,15 +55,10 @@ To help get you started, here are some useful Buildfiles.
 
 * Build any Docker container from a Dockerfile [Buildfile](buildfiles/docker.Buildfile)
 * Build a lean Spring Boot application from source using a Maven pom.xml file [Buildfile](buildfiles/springboot.Buildfile)
+* Build with an OpenShift Source-to-Image builder [Buildfile](buildfiles/sti.Buildfile)
 * Build a Node.js application from a Gulp configuration file [Buildfile](buildfiles/node-gulp.Buildfile)
 
 A build step is itself simply a Docker image within which your
 source will be transiently mounted in a special directory. You can customize
 the arguments, environment variables and parameters used to invoke a build step,
 making them easy to configure.
-
-## TODOs
-
-* Add Stacksmith integration
-* Better build/poll UI
-* Add automatic creation of buildfiles
